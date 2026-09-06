@@ -1,0 +1,18 @@
+---
+import SimplePage from '../layouts/SimplePage.astro';
+import { site } from '../data/site';
+---
+<SimplePage heading="Privacy" description={`How ${site.name} apps handle your data.`}>
+  <p>
+    Each app's data practices are published on its App Store listing, under App Privacy.
+    Those listings are the authoritative source.
+  </p>
+  <p>
+    This site itself sets no tracking cookies. Your day/night theme choice is stored
+    locally in your browser and never leaves your device.
+  </p>
+  <p>
+    Questions about a specific app? Email
+    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+  </p>
+</SimplePage>

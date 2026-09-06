@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title={`${site.name} — ${site.tagline}`}
+  description={`A collection of focused iPhone and iPad apps by ${site.name}.`}
+>
+  <div class="page-shell">
+    <SiteHeader />
+
+    <main>
+      <section class="home-hero">
+        <span class="home-kicker">Independent software · small tools, clear jobs</span>
+        <h1>Four apps.<br/><em>Four very different jobs.</em></h1>
+        <p>
+          Utilities, party games and professional tools—each product is designed around
+          one clear purpose instead of a crowded feature checklist.
+        </p>
+        <div class="hero-orbit" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </div>
+      </section>
+
+      <section class="product-gallery" aria-label="Applications">
+        {products.map((product, index) => (
+          <ProductCard product={product} index={index} />
+        ))}
+      </section>
+
+      <section class="home-manifesto">
+        <span>One shared system</span>
+        <h2>Different products should still feel like they belong to the same studio.</h2>
+        <p>
+          The site keeps a consistent interaction language while each app keeps its own
+          color, artwork and personality—in daylight and after dark.
+        </p>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </div>
+
+  <script is:inline>
+    (() => {
+      const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+      document.querySelectorAll('[data-product-get]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const store = button.dataset.storeUrl;
+          const landing = button.dataset.landingUrl;
+          window.location.href = isiOS && store ? store : landing;
+        });
+      });
+    })();
+  </script>
+</BaseLayout>

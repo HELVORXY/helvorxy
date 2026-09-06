@@ -1,0 +1,13 @@
+---
+import SimplePage from '../layouts/SimplePage.astro';
+import { site } from '../data/site';
+---
+<SimplePage heading="Contact" description={`Get in touch with ${site.name}.`}>
+  <p>
+    For product questions, bug reports and support, email
+    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+  </p>
+  <p>
+    Please include the app name and your iOS version—it makes issues far faster to reproduce.
+  </p>
+</SimplePage>

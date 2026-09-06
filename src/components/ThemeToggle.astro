@@ -1,0 +1,20 @@
+---
+/**
+ * Day / night switch.
+ *
+ * The initial theme is stamped onto <html> by the blocking script in
+ * BaseLayout, so this button only has to flip and persist it.
+ */
+---
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch between day and night theme">
+  <span class="theme-toggle__track" aria-hidden="true">
+    <svg class="theme-toggle__icon is-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.6v2.3M12 19.1v2.3M4.2 12H1.9M22.1 12h-2.3M6.5 6.5 4.9 4.9M19.1 19.1l-1.6-1.6M17.5 6.5l1.6-1.6M4.9 19.1l1.6-1.6" />
+    </svg>
+    <svg class="theme-toggle__icon is-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z" />
+    </svg>
+    <span class="theme-toggle__knob"></span>
+  </span>
+</button>

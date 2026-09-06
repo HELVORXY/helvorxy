@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Product hue. Everything else comes from the day/night theme. */
+  hue?: { primary: string; accent: string };
+}
+
+const { title, description = site.tagline, hue } = Astro.props as Props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.domain).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0e15" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <title>{title}</title>
+
+    {hue && (
+      <style set:html={`:root{--product-primary:${hue.primary};--product-accent:${hue.accent}}`}></style>
+    )}
+
+    {/* Runs before first paint so the page never flashes the wrong theme. */}
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('helvorxy-theme');
+        } catch (error) {
+          theme = null;
+        }
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+
+        const paint = (theme) => {
+          root.dataset.theme = theme;
+          document.querySelectorAll('meta[name="theme-color"]').forEach((tag) => {
+            tag.setAttribute('content', theme === 'dark' ? '#0b0e15' : '#f6f7fb');
+            tag.removeAttribute('media');
+          });
+          document
+            .querySelectorAll('[data-theme-toggle]')
+            .forEach((button) => button.setAttribute('aria-pressed', String(theme === 'dark')));
+        };
+
+        paint(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+        document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            paint(next);
+            try {
+              localStorage.setItem('helvorxy-theme', next);
+            } catch (error) {
+              /* private mode — the choice just won't persist */
+            }
+          });
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+      })();
+    </script>
+  </body>
+</html>

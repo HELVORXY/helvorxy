@@ -1,0 +1,17 @@
+---
+import SimplePage from '../layouts/SimplePage.astro';
+import { site } from '../data/site';
+---
+<SimplePage
+  heading={`About ${site.name}`}
+  description={`${site.name} builds focused iPhone and iPad apps, each designed around one clear job.`}
+>
+  <p>
+    {site.name} is an independent software studio. We build small iPhone and iPad apps,
+    each designed around a single practical job instead of an ever-growing feature list.
+  </p>
+  <p>
+    Every app ships with the same commitments: a clear interface, no account requirement
+    where one isn't needed, and no data collection beyond what the app genuinely uses.
+  </p>
+</SimplePage>

@@ -1,0 +1,18 @@
+---
+import SimplePage from '../layouts/SimplePage.astro';
+import { site } from '../data/site';
+---
+<SimplePage heading="Terms" description={`Terms of use for ${site.name} apps and this website.`}>
+  <p>
+    Apps published by {site.name} are distributed through the Apple App Store and are also
+    governed by Apple's Licensed Application End User License Agreement.
+  </p>
+  <p>
+    App names, icons and screenshots on this site are shown for identification of the
+    products they belong to.
+  </p>
+  <p>
+    For anything not covered here, email
+    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+  </p>
+</SimplePage>

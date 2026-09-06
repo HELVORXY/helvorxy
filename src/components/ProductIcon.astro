@@ -1,0 +1,14 @@
+---
+import type { Product } from '../data/products';
+const { product, size = 72 } = Astro.props as { product: Product; size?: number };
+---
+<img
+  class="product-icon"
+  src={product.icon}
+  width={size}
+  height={size}
+  style={`--icon-size:${size}px`}
+  alt={`${product.name} app icon`}
+  loading="lazy"
+  decoding="async"
+/>

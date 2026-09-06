@@ -1,0 +1,24 @@
+---
+/**
+ * A single App Store screenshot in a device-shaped frame.
+ * Intrinsic size is fixed (Apple delivers 600×1299 for the 6.9" shots) so the
+ * layout never shifts while the image loads.
+ */
+interface Props {
+  src: string;
+  alt: string;
+  eager?: boolean;
+}
+const { src, alt, eager = false } = Astro.props as Props;
+---
+<figure class="product-shot">
+  <img
+    src={src}
+    alt={alt}
+    width="600"
+    height="1299"
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={eager ? 'high' : 'auto'}
+  />
+</figure>

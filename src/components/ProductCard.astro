@@ -1,0 +1,53 @@
+---
+import type { Product } from '../data/products';
+import ProductIcon from './ProductIcon.astro';
+const { product, index = 0 } = Astro.props as { product: Product; index?: number };
+const preview = product.screenshots.slice(0, 3);
+---
+<article
+  class="gallery-card reveal"
+  style={`--card-hue:${product.theme.primary};--card-hue-2:${product.theme.accent};--delay:${index * 70}ms`}
+>
+  <div class="gallery-card__top">
+    <ProductIcon product={product} size={58} />
+    <div class="gallery-card__identity">
+      <span>{product.eyebrow}</span>
+      <h2>{product.name}</h2>
+      <p>{product.subtitle}</p>
+    </div>
+    <button
+      class="get-pill"
+      data-product-get
+      data-store-url={product.storeUrl}
+      data-landing-url={`/apps/${product.slug}`}
+    >Get</button>
+  </div>
+
+  <a class="gallery-card__visual" href={`/apps/${product.slug}`} aria-label={`Explore ${product.name}`}>
+    <span class="gallery-card__glow" aria-hidden="true"></span>
+    <span class="shot-fan">
+      {preview.map((src, shotIndex) => {
+        /* The first card sits above the fold, so its front screenshot loads eagerly. */
+        const isLcpCandidate = index === 0 && shotIndex === 0;
+        return (
+          <img
+            src={src}
+            alt={shotIndex === 0 ? `${product.name} App Store screenshot` : ''}
+            width="600"
+            height="1299"
+            loading={isLcpCandidate ? 'eager' : 'lazy'}
+            fetchpriority={isLcpCandidate ? 'high' : 'auto'}
+            decoding="async"
+          />
+        );
+      })}
+    </span>
+  </a>
+
+  <div class="gallery-card__footer">
+    <p>{product.homeLine}</p>
+    <a class="round-arrow" href={`/apps/${product.slug}`} aria-label={`Open ${product.name}`}>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

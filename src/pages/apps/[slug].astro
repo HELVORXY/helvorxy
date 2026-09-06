@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import ProductIcon from '../../components/ProductIcon.astro';
+import ProductShot from '../../components/ProductShot.astro';
+import AppStoreBadge from '../../components/AppStoreBadge.astro';
+import { products } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const [heroShot, ...restShots] = product.screenshots;
+---
+<BaseLayout
+  title={`${product.name} — ${product.subtitle}`}
+  description={product.heroCopy}
+  hue={product.theme}
+>
+  <div class="page-shell is-product">
+    <SiteHeader />
+
+    <main>
+      <section class="product-hero">
+        <div class="product-hero__copy reveal">
+          <a class="back-link" href="/">← All apps</a>
+
+          <div class="product-title-row">
+            <ProductIcon product={product} size={72} />
+            <div>
+              <span class="product-eyebrow">{product.eyebrow}</span>
+              <p>{product.name} · {product.storeFact}</p>
+            </div>
+          </div>
+
+          <h1>{product.heroTitle}</h1>
+          <p class="product-lede">{product.heroCopy}</p>
+
+          <div class="landing-actions">
+            <AppStoreBadge href={product.storeUrl} label={`Download ${product.name} on the App Store`} />
+            <span class="micro-fact">{product.category} · {product.size} · {product.meta.minimumOs}</span>
+          </div>
+        </div>
+
+        <div class="product-hero__art reveal">
+          <span class="hero-glow" aria-hidden="true"></span>
+          <ProductShot src={heroShot} alt={`${product.name} App Store screenshot`} eager={true} />
+        </div>
+      </section>
+
+      <section class="fact-strip reveal">
+        {product.facts.map(([value, label]) => (
+          <div><strong>{value}</strong><span>{label}</span></div>
+        ))}
+      </section>
+
+      <section class="shots-section">
+        <div class="section-head">
+          <span class="section-label">From the App Store</span>
+          <h2>See it before you download.</h2>
+        </div>
+        <div class="shots-rail reveal">
+          {restShots.map((src, index) => (
+            <ProductShot src={src} alt={`${product.name} App Store screenshot ${index + 2}`} />
+          ))}
+        </div>
+      </section>
+
+      <section class="feature-section">
+        <div class="section-head">
+          <span class="section-label">What it does</span>
+        </div>
+        <div class="feature-grid">
+          {product.features.map(([title, copy], index) => (
+            <article class="feature-tile reveal" style={`--tile-delay:${index * 55}ms`}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="store-story reveal">
+        <div>
+          <span class="section-label">Built for the moment</span>
+          <h2>{product.homeLine}</h2>
+        </div>
+        <dl class="store-story__meta">
+          <div><dt>Category</dt><dd>{product.category}</dd></div>
+          <div><dt>Version</dt><dd>{product.meta.version}</dd></div>
+          <div><dt>Updated</dt><dd>{product.meta.updated}</dd></div>
+          <div><dt>Requires</dt><dd>{product.meta.minimumOs}</dd></div>
+          <div><dt>Languages</dt><dd>{product.languages}</dd></div>
+          <div><dt>Age rating</dt><dd>{product.age}</dd></div>
+          <div><dt>Price</dt><dd>{product.storeFact}</dd></div>
+          <div><dt>Seller</dt><dd>{product.meta.seller}</dd></div>
+        </dl>
+      </section>
+
+      <section class="faq-section">
+        <div class="section-head">
+          <span class="section-label">Quick answers</span>
+        </div>
+        <div class="faq-list">
+          {product.faq.map(([question, answer]) => (
+            <details class="faq-item reveal">
+              <summary>{question}<span aria-hidden="true">+</span></summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="download-panel reveal">
+        <div>
+          <span class="product-eyebrow">Available on the App Store</span>
+          <h2>Try {product.name} on your iPhone or iPad.</h2>
+        </div>
+        <AppStoreBadge href={product.storeUrl} label={`Download ${product.name} on the App Store`} />
+      </section>
+    </main>
+
+    <SiteFooter />
+  </div>
+</BaseLayout>
