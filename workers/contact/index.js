@@ -115,7 +115,7 @@ const handleRequest = async (request, env) => {
       to: env.CONTACT_TO_EMAIL,
       from: { email: env.CONTACT_FROM_EMAIL, name: 'Helvorxy Website' },
       replyTo: { email, name },
-      subject: `Website contact – ${subject}`,
+      subject: `Website contact - ${subject}`,
       text,
     });
   } catch {
