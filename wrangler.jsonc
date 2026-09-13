@@ -1,11 +1,5 @@
 {
   "name": "helvorxy",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-09-14",
-  "send_email": [
-    {
-      "name": "CONTACT_EMAIL",
-      "allowed_sender_addresses": ["contact@helvorxy.com"]
-    }
-  ]
+  "compatibility_date": "2026-09-14"
 }

@@ -53,20 +53,24 @@ screenshots) and prints the store metadata mirrored in `src/data/products.ts`.
 
 ## Contact delivery
 
-The contact form posts to `functions/api/contact.js`. The Pages Function validates
-Cloudflare Turnstile server-side and sends the message through the `CONTACT_EMAIL`
-Cloudflare Email Service binding. No recipient address is shipped in the website HTML.
+The contact form posts to `functions/api/contact.js`. The Pages Function forwards the
+request through the `CONTACT_SERVICE` service binding to the private
+`helvorxy-contact-email` Worker. The Worker validates Cloudflare Turnstile server-side
+and sends the message through Cloudflare Email Service. No recipient address is
+shipped in the website HTML.
 
-Configure these variables for both preview and production in Cloudflare Pages:
+Configure these values on the contact Worker:
 
 - `TURNSTILE_SITE_KEY`
 - `TURNSTILE_SECRET_KEY` (secret)
 - `CONTACT_TO_EMAIL` (secret)
 - `CONTACT_FROM_EMAIL` (for example `contact@helvorxy.com`)
 
-Before deployment, onboard `helvorxy.com` in Cloudflare Email Service and verify the
-recipient under Email Routing. The binding and allowed sender are declared in
-`wrangler.jsonc`. Local secrets belong in `.dev.vars`, which is ignored by Git.
+The Worker email binding and public values are declared in
+`workers/contact/wrangler.jsonc`. Add the `CONTACT_SERVICE` service binding to the
+Pages project and point it to `helvorxy-contact-email`. Before deployment, onboard
+`helvorxy.com` in Cloudflare Email Service and verify the recipient under Email
+Routing. Local secrets belong in `.dev.vars`, which is ignored by Git.
 
 ## Run
 

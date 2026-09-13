@@ -1,0 +1,16 @@
+{
+  "name": "helvorxy-contact-email",
+  "main": "./index.js",
+  "compatibility_date": "2026-09-14",
+  "workers_dev": false,
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "allowed_sender_addresses": ["contact@helvorxy.com"]
+    }
+  ],
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAEzCMX44DUcXm4iu",
+    "CONTACT_FROM_EMAIL": "contact@helvorxy.com"
+  }
+}

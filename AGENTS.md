@@ -1185,9 +1185,10 @@ Form fields:
 
 Do not collect unnecessary personal data.
 
-Use the Cloudflare Pages Function at `/api/contact`, validate Cloudflare Turnstile
-server-side, and deliver through the `CONTACT_EMAIL` Cloudflare Email Service binding.
-Do not show a success state unless the email binding confirms delivery.
+Use the Cloudflare Pages Function at `/api/contact` as a same-origin proxy to a
+dedicated contact Worker through a service binding. The Worker validates Cloudflare
+Turnstile server-side and delivers through the `CONTACT_EMAIL` Cloudflare Email
+Service binding. Do not show a success state unless the email binding confirms delivery.
 
 Suggested body:
 
