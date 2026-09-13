@@ -319,3 +319,14 @@ export const products: Product[] = [
 export const productsBySlug = Object.fromEntries(
   products.map((product) => [product.slug, product])
 ) as Record<string, Product>;
+
+/** Homepage display order. Product definitions remain independent of merchandising order. */
+export const featuredProductIds = [
+  'gamepad-tester',
+  'cv-maker-professional',
+  'wordexa',
+  'invique',
+  'nureya',
+] as const;
+
+export const featuredProducts = featuredProductIds.map((id) => productsBySlug[id]);
