@@ -1173,11 +1173,8 @@ This page describes Helvorxy as a product philosophy, not a personal biography.
 
 # 33. Contact page
 
-Primary contact:
-
-```text
-k12181159@gmail.com
-```
+The recipient email is private Cloudflare configuration and must never appear in
+source files, generated HTML, client-side JavaScript, or a `mailto:` URL.
 
 Form fields:
 
@@ -1188,14 +1185,9 @@ Form fields:
 
 Do not collect unnecessary personal data.
 
-Cloudflare Pages does not provide a Netlify-style automatic form inbox.
-
-Until a real server-side form delivery service is configured:
-
-- generate a populated `mailto:k12181159@gmail.com`
-- URL-encode subject and body
-- explain that the user's email client will open
-- do not show a false "message sent" success state
+Use the Cloudflare Pages Function at `/api/contact`, validate Cloudflare Turnstile
+server-side, and deliver through the `CONTACT_EMAIL` Cloudflare Email Service binding.
+Do not show a success state unless the email binding confirms delivery.
 
 Suggested body:
 
@@ -1779,11 +1771,7 @@ If reintroduced, reviews must be supported by a legitimate source and usage righ
 
 # 59. Contact and support by product
 
-The site default contact is:
-
-```text
-k12181159@gmail.com
-```
+The site default contact destination is private Cloudflare configuration.
 
 A future product may optionally override support contact:
 
@@ -1794,7 +1782,7 @@ product.supportEmail;
 Generic components should use:
 
 ```text
-product.supportEmail ?? site.supportEmail
+the localized contact route
 ```
 
 ---
@@ -1816,7 +1804,6 @@ export const site = {
   name: "Helvorxy",
   domain: "https://helvorxy.com",
   defaultLocale: "en",
-  supportEmail: "k12181159@gmail.com",
 };
 ```
 

@@ -11,12 +11,13 @@
         }
         document.documentElement.dataset.theme = theme;
       })();
-    </script><link rel="stylesheet" href="/_astro/about.C1S7syFz.css"></head> <body>  <div class="page-shell"> <header class="site-header"> <a class="studio-mark" href="/" aria-label="Helvorxy home"> <span class="studio-mark__glyph" aria-hidden="true"> <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"> <path d="M7 4c0 7 18 5 18 12S7 21 7 28"></path> <path d="M25 4c0 7-18 5-18 12s18 5 18 12"></path> </svg> </span> <span class="studio-mark__text"> <b>HELVORXY</b> </span> </a> <nav> <a href="/">Apps</a> <a href="/about">About</a> <a href="/contact">Contact</a> </nav> <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch between day and night theme"> <span class="theme-toggle__track" aria-hidden="true"> <svg class="theme-toggle__icon is-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"> <circle cx="12" cy="12" r="4.2"></circle> <path d="M12 2.6v2.3M12 19.1v2.3M4.2 12H1.9M22.1 12h-2.3M6.5 6.5 4.9 4.9M19.1 19.1l-1.6-1.6M17.5 6.5l1.6-1.6M4.9 19.1l1.6-1.6"></path> </svg> <svg class="theme-toggle__icon is-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"></path> </svg> <span class="theme-toggle__knob"></span> </span> </button> </header> <main class="simple-page"> <a class="back-link" href="/">← Home</a> <h1>Contact</h1> <div class="prose"> <p>
-For product questions, bug reports and support, email
-<a href="mailto:k12181159@gmail.com">k12181159@gmail.com</a>.
+    </script><link rel="stylesheet" href="/_astro/about.CRpiDQM-.css"></head> <body>  <div class="page-shell"> <header class="site-header"> <a class="studio-mark" href="/" aria-label="Helvorxy home"> <span class="studio-mark__glyph" aria-hidden="true"> <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"> <path d="M7 4c0 7 18 5 18 12S7 21 7 28"></path> <path d="M25 4c0 7-18 5-18 12s18 5 18 12"></path> </svg> </span> <span class="studio-mark__text"> <b>HELVORXY</b> </span> </a> <nav> <a href="/">Apps</a> <a href="/about">About</a> <a href="/contact">Contact</a> </nav> <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch between day and night theme"> <span class="theme-toggle__track" aria-hidden="true"> <svg class="theme-toggle__icon is-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"> <circle cx="12" cy="12" r="4.2"></circle> <path d="M12 2.6v2.3M12 19.1v2.3M4.2 12H1.9M22.1 12h-2.3M6.5 6.5 4.9 4.9M19.1 19.1l-1.6-1.6M17.5 6.5l1.6-1.6M4.9 19.1l1.6-1.6"></path> </svg> <svg class="theme-toggle__icon is-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7Z"></path> </svg> <span class="theme-toggle__knob"></span> </span> </button> </header> <main class="simple-page"> <a class="back-link" href="/">← Home</a> <h1>Contact</h1> <div class="prose"> <div class="contact-intro"> <p>
+Use the form for product support, privacy requests, legal questions or general feedback.
 </p> <p>
-Please include the app name and your iOS version—it makes issues far faster to reproduce.
-</p> </div> </main> <footer class="site-footer"> <a class="site-footer__brand" href="/">Helvorxy</a> <nav> <a href="/about">About</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/contact">Contact</a> </nav> <small>© 2026 Helvorxy</small> </footer> </div>  <script>
+For app issues, include the app name, device model and iOS version so we can investigate faster.
+</p> </div> <form id="contact-form" class="contact-form" action="/api/contact" method="post"> <div class="contact-form__grid"> <label> <span>Name</span> <input name="name" type="text" autocomplete="name" minlength="2" maxlength="100" required> </label> <label> <span>Email</span> <input name="email" type="email" autocomplete="email" maxlength="254" required> </label> </div> <label> <span>Subject</span> <input name="subject" type="text" minlength="3" maxlength="150" required> </label> <label> <span>Message</span> <textarea name="message" rows="7" minlength="10" maxlength="5000" required></textarea> </label> <div class="contact-form__honeypot" aria-hidden="true"> <label>
+Website
+<input name="website" type="text" tabindex="-1" autocomplete="off"> </label> </div> <div id="contact-turnstile" class="contact-form__turnstile"></div> <p class="contact-form__note">Protected by Cloudflare Turnstile. No contact-message database is used.</p> <p id="contact-status" class="contact-form__status" role="status" aria-live="polite"></p> <button id="contact-submit" class="contact-form__submit" type="submit" disabled>Loading secure form…</button> </form> </div> </main> <footer class="site-footer"> <a class="site-footer__brand" href="/">Helvorxy</a> <nav> <a href="/about">About</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/contact">Contact</a> </nav> <small>© 2026 Helvorxy</small> </footer> </div>  <script>
       (() => {
         const root = document.documentElement;
 
@@ -57,4 +58,100 @@ Please include the app name and your iOS version—it makes issues far faster to
         );
         document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
       })();
-    </script> </body> </html>
+    </script> </body> </html> <script>
+  (() => {
+    const form = document.querySelector('#contact-form');
+    const submit = document.querySelector('#contact-submit');
+    const status = document.querySelector('#contact-status');
+    if (!(form instanceof HTMLFormElement) || !(submit instanceof HTMLButtonElement) || !status) return;
+
+    let widgetId;
+
+    const setStatus = (message, kind = '') => {
+      status.textContent = message;
+      status.dataset.kind = kind;
+    };
+
+    const loadTurnstile = () => new Promise((resolve, reject) => {
+      if (window.turnstile) return resolve(window.turnstile);
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = () => reject(new Error('Security check unavailable'));
+      document.head.append(script);
+    });
+
+    const initialise = async () => {
+      try {
+        const [configResponse, turnstile] = await Promise.all([
+          fetch('/api/contact', { headers: { Accept: 'application/json' } }),
+          loadTurnstile(),
+        ]);
+        if (!configResponse.ok || !turnstile) throw new Error('Contact service unavailable');
+        const { siteKey } = await configResponse.json();
+        if (!siteKey) throw new Error('Contact service unavailable');
+
+        widgetId = turnstile.render('#contact-turnstile', {
+          sitekey: siteKey,
+          action: 'contact',
+          theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
+          callback: () => {
+            submit.disabled = false;
+            submit.textContent = 'Send message';
+            setStatus('');
+          },
+          'expired-callback': () => {
+            submit.disabled = true;
+            setStatus('The security check expired. Please complete it again.', 'error');
+          },
+          'error-callback': () => {
+            submit.disabled = true;
+            setStatus('The security check could not load. Please try again.', 'error');
+          },
+        });
+      } catch {
+        submit.disabled = true;
+        submit.textContent = 'Form temporarily unavailable';
+        setStatus('The contact service is temporarily unavailable. Please try again later.', 'error');
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !window.turnstile || widgetId === undefined) return;
+
+      const token = window.turnstile.getResponse(widgetId);
+      if (!token) {
+        setStatus('Please complete the security check.', 'error');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      setStatus('Sending your message…');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.message || 'Your message could not be sent.');
+
+        form.reset();
+        window.turnstile.reset(widgetId);
+        setStatus('Message sent. Thank you—we’ll get back to you as soon as possible.', 'success');
+      } catch (error) {
+        window.turnstile.reset(widgetId);
+        setStatus(error instanceof Error ? error.message : 'Your message could not be sent.', 'error');
+      } finally {
+        submit.textContent = 'Send message';
+      }
+    });
+
+    initialise();
+  })();
+</script>

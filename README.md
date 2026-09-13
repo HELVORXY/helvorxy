@@ -15,8 +15,8 @@ Astro / Cloudflare Pages-ready site for the Helvorxy App Store products.
 ## Universal architecture
 
 All landing pages are generated from `src/data/products.ts` by a single renderer,
-`src/pages/apps/[slug].astro`. Studio-level branding (name, wordmark, support
-address) lives in `src/data/site.ts`.
+`src/pages/apps/[slug].astro`. Studio-level branding (name, wordmark and domain)
+lives in `src/data/site.ts`.
 
 Product-specific differences live in product data only:
 
@@ -50,6 +50,23 @@ npm run sync:appstore
 
 The script re-fetches all five apps' artwork (512px webp icons, 600px-wide webp
 screenshots) and prints the store metadata mirrored in `src/data/products.ts`.
+
+## Contact delivery
+
+The contact form posts to `functions/api/contact.js`. The Pages Function validates
+Cloudflare Turnstile server-side and sends the message through the `CONTACT_EMAIL`
+Cloudflare Email Service binding. No recipient address is shipped in the website HTML.
+
+Configure these variables for both preview and production in Cloudflare Pages:
+
+- `TURNSTILE_SITE_KEY`
+- `TURNSTILE_SECRET_KEY` (secret)
+- `CONTACT_TO_EMAIL` (secret)
+- `CONTACT_FROM_EMAIL` (for example `contact@helvorxy.com`)
+
+Before deployment, onboard `helvorxy.com` in Cloudflare Email Service and verify the
+recipient under Email Routing. The binding and allowed sender are declared in
+`wrangler.jsonc`. Local secrets belong in `.dev.vars`, which is ignored by Git.
 
 ## Run
 

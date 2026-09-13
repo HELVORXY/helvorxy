@@ -3,11 +3,145 @@ import SimplePage from '../layouts/SimplePage.astro';
 import { site } from '../data/site';
 ---
 <SimplePage heading="Contact" description={`Get in touch with ${site.name}.`}>
-  <p>
-    For product questions, bug reports and support, email
-    <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
-  </p>
-  <p>
-    Please include the app name and your iOS version—it makes issues far faster to reproduce.
-  </p>
+  <div class="contact-intro">
+    <p>
+      Use the form for product support, privacy requests, legal questions or general feedback.
+    </p>
+    <p>
+      For app issues, include the app name, device model and iOS version so we can investigate faster.
+    </p>
+  </div>
+
+  <form id="contact-form" class="contact-form" action="/api/contact" method="post">
+    <div class="contact-form__grid">
+      <label>
+        <span>Name</span>
+        <input name="name" type="text" autocomplete="name" minlength="2" maxlength="100" required />
+      </label>
+      <label>
+        <span>Email</span>
+        <input name="email" type="email" autocomplete="email" maxlength="254" required />
+      </label>
+    </div>
+
+    <label>
+      <span>Subject</span>
+      <input name="subject" type="text" minlength="3" maxlength="150" required />
+    </label>
+
+    <label>
+      <span>Message</span>
+      <textarea name="message" rows="7" minlength="10" maxlength="5000" required></textarea>
+    </label>
+
+    <div class="contact-form__honeypot" aria-hidden="true">
+      <label>
+        Website
+        <input name="website" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div id="contact-turnstile" class="contact-form__turnstile"></div>
+    <p class="contact-form__note">Protected by Cloudflare Turnstile. No contact-message database is used.</p>
+    <p id="contact-status" class="contact-form__status" role="status" aria-live="polite"></p>
+    <button id="contact-submit" class="contact-form__submit" type="submit" disabled>Loading secure form…</button>
+  </form>
 </SimplePage>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector('#contact-form');
+    const submit = document.querySelector('#contact-submit');
+    const status = document.querySelector('#contact-status');
+    if (!(form instanceof HTMLFormElement) || !(submit instanceof HTMLButtonElement) || !status) return;
+
+    let widgetId;
+
+    const setStatus = (message, kind = '') => {
+      status.textContent = message;
+      status.dataset.kind = kind;
+    };
+
+    const loadTurnstile = () => new Promise((resolve, reject) => {
+      if (window.turnstile) return resolve(window.turnstile);
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = () => reject(new Error('Security check unavailable'));
+      document.head.append(script);
+    });
+
+    const initialise = async () => {
+      try {
+        const [configResponse, turnstile] = await Promise.all([
+          fetch('/api/contact', { headers: { Accept: 'application/json' } }),
+          loadTurnstile(),
+        ]);
+        if (!configResponse.ok || !turnstile) throw new Error('Contact service unavailable');
+        const { siteKey } = await configResponse.json();
+        if (!siteKey) throw new Error('Contact service unavailable');
+
+        widgetId = turnstile.render('#contact-turnstile', {
+          sitekey: siteKey,
+          action: 'contact',
+          theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
+          callback: () => {
+            submit.disabled = false;
+            submit.textContent = 'Send message';
+            setStatus('');
+          },
+          'expired-callback': () => {
+            submit.disabled = true;
+            setStatus('The security check expired. Please complete it again.', 'error');
+          },
+          'error-callback': () => {
+            submit.disabled = true;
+            setStatus('The security check could not load. Please try again.', 'error');
+          },
+        });
+      } catch {
+        submit.disabled = true;
+        submit.textContent = 'Form temporarily unavailable';
+        setStatus('The contact service is temporarily unavailable. Please try again later.', 'error');
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !window.turnstile || widgetId === undefined) return;
+
+      const token = window.turnstile.getResponse(widgetId);
+      if (!token) {
+        setStatus('Please complete the security check.', 'error');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      setStatus('Sending your message…');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.message || 'Your message could not be sent.');
+
+        form.reset();
+        window.turnstile.reset(widgetId);
+        setStatus('Message sent. Thank you—we’ll get back to you as soon as possible.', 'success');
+      } catch (error) {
+        window.turnstile.reset(widgetId);
+        setStatus(error instanceof Error ? error.message : 'Your message could not be sent.', 'error');
+      } finally {
+        submit.textContent = 'Send message';
+      }
+    });
+
+    initialise();
+  })();
+</script>
