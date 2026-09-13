@@ -19,9 +19,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 /** App Store track id → slug used across the site. */
 const APPS = {
   6759626923: 'gamepad-tester',
-  6756029370: 'party-hype',
-  6762468335: 'pickify',
   6785433043: 'cv-maker-professional',
+  6799716023: 'invique',
+  6800901350: 'wordexa',
+  6807823446: 'nureya',
 };
 
 const LOOKUP = `https://itunes.apple.com/lookup?id=${Object.keys(APPS).join(',')}&country=tr&entity=software`;

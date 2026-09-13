@@ -6,9 +6,10 @@ Astro / Cloudflare Pages-ready site for the Helvorxy App Store products.
 
 - `/`
 - `/apps/gamepad-tester`
-- `/apps/party-hype`
-- `/apps/pickify`
+- `/apps/nureya`
 - `/apps/cv-maker-professional`
+- `/apps/wordexa`
+- `/apps/invique`
 - `/about`, `/privacy`, `/terms`, `/contact`
 
 ## Universal architecture
@@ -47,7 +48,7 @@ Icons and screenshots are downloaded from Apple's artwork CDN into
 npm run sync:appstore
 ```
 
-The script re-fetches all four apps' artwork (512px webp icons, 600px-wide webp
+The script re-fetches all five apps' artwork (512px webp icons, 600px-wide webp
 screenshots) and prints the store metadata mirrored in `src/data/products.ts`.
 
 ## Run
