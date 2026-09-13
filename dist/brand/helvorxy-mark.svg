@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Helvorxy mark</title>
+  <desc id="desc">Two interwoven paths forming a geometric H and X.</desc>
+  <defs>
+    <linearGradient id="surface" x1="32" y1="20" x2="226" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171D31"/>
+      <stop offset="1" stop-color="#090C14"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="55" y1="42" x2="199" y2="213" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="0.52" stop-color="#755CFF"/>
+      <stop offset="1" stop-color="#4F7FFF"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="200" y1="42" x2="57" y2="214" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67E8F9"/>
+      <stop offset="0.5" stop-color="#22B4E8"/>
+      <stop offset="1" stop-color="#6D5CFF"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="68" fill="url(#surface)"/>
+  <rect x="8.75" y="8.75" width="238.5" height="238.5" rx="67.25" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="1.5"/>
+  <g fill="none" stroke-linecap="round" stroke-width="15" filter="url(#glow)">
+    <path d="M67 48c0 47 122 34 122 80S67 161 67 208" stroke="url(#violet)"/>
+    <path d="M189 48c0 47-122 34-122 80s122 33 122 80" stroke="url(#cyan)"/>
+  </g>
+  <circle cx="67" cy="48" r="7.5" fill="#C4B5FD"/>
+  <circle cx="189" cy="48" r="7.5" fill="#A5F3FC"/>
+  <circle cx="67" cy="208" r="7.5" fill="#818CF8"/>
+  <circle cx="189" cy="208" r="7.5" fill="#38BDF8"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">Helvorxy</title>
+  <desc id="desc">Helvorxy wordmark with an interwoven H and X symbol.</desc>
+  <defs>
+    <linearGradient id="surface" x1="24" y1="16" x2="164" y2="166" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171D31"/>
+      <stop offset="1" stop-color="#090C14"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="35" y1="28" x2="665" y2="148" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="0.38" stop-color="#6D5CFF"/>
+      <stop offset="1" stop-color="#159AC9"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="160" height="160" rx="46" fill="url(#surface)"/>
+  <rect x="10.75" y="10.75" width="158.5" height="158.5" rx="45.25" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="1.5"/>
+  <g fill="none" stroke="url(#brand)" stroke-linecap="round" stroke-width="10">
+    <path d="M50 37c0 32 80 24 80 53s-80 21-80 53"/>
+    <path d="M130 37c0 32-80 24-80 53s80 21 80 53"/>
+  </g>
+  <text x="205" y="112" fill="url(#brand)" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="66" font-weight="800" letter-spacing="8">HELVORXY</text>
+</svg>

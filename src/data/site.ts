@@ -6,5 +6,9 @@ export const site = {
   markSuffix: "",
   tagline: "Focused apps for everyday moments",
   domain: "https://helvorxy.com",
+  logo: {
+    mark: "/brand/helvorxy-mark.svg",
+    wordmark: "/brand/helvorxy-logo.svg",
+  },
   year: 2026,
 } as const;
