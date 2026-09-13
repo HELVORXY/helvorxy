@@ -48,12 +48,7 @@ function prepareLegalHtml(source: string): string {
     )
     .replace(/\[?k12181159@gmail\.com\]?/gi, '<a href="/contact">contact form</a>')
     .replace(
-      /<strong>\[<\/strong>\s*https:\/\/helvorxy\.com\/contact\s*<strong>\]<\/strong>/gi,
-      'https://helvorxy.com/contact',
-    )
-    .replace(/\[https:\/\/helvorxy\.com\/contact\]/gi, 'https://helvorxy.com/contact')
-    .replace(
-      /https:\/\/helvorxy\.com\/contact/gi,
+      /<a href="https:\/\/helvorxy\.com\/contact" rel="noopener noreferrer">https:\/\/helvorxy\.com\/contact<\/a>/gi,
       '<a href="/contact">contact form</a>',
     )
     .trim();
