@@ -1,0 +1,17 @@
+---
+import ProductLegalPage from '../../../layouts/ProductLegalPage.astro';
+import { products } from '../../../data/products';
+import { productLegalBySlug } from '../../../data/productLegal';
+
+export function getStaticPaths() {
+  return products.flatMap((product) => {
+    const legalDocument = productLegalBySlug[product.slug]?.privacy;
+    return legalDocument
+      ? [{ params: { slug: product.slug }, props: { product, legalDocument } }]
+      : [];
+  });
+}
+
+const { product, legalDocument } = Astro.props;
+---
+<ProductLegalPage product={product} kind="privacy" legalDocument={legalDocument} />

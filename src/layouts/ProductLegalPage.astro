@@ -1,0 +1,55 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ProductIcon from '../components/ProductIcon.astro';
+import type { Product } from '../data/products';
+import type { LegalDocument, LegalKind } from '../data/productLegal';
+
+interface Props {
+  product: Product;
+  kind: LegalKind;
+  legalDocument: LegalDocument;
+}
+
+const { product, kind, legalDocument } = Astro.props as Props;
+---
+<BaseLayout
+  title={`${legalDocument.title} — Helvorxy`}
+  description={legalDocument.description}
+  hue={product.theme}
+>
+  <div class="page-shell">
+    <SiteHeader />
+    <main class="simple-page legal-page">
+      <a class="back-link" href={`/apps/${product.slug}`}>← {product.name}</a>
+
+      <div class="legal-page__identity">
+        <ProductIcon product={product} size={58} />
+        <div>
+          <span class="product-eyebrow">{product.name}</span>
+          <h1>{legalDocument.title}</h1>
+        </div>
+      </div>
+
+      <nav class="legal-tabs" aria-label={`${product.name} legal documents`}>
+        <a
+          href={product.legal.privacyPath}
+          aria-current={kind === 'privacy' ? 'page' : undefined}
+        >Privacy Policy</a>
+        <a
+          href={product.legal.termsPath}
+          aria-current={kind === 'terms' ? 'page' : undefined}
+        >Terms &amp; Conditions</a>
+      </nav>
+
+      <article class="prose legal-document" set:html={legalDocument.html}></article>
+
+      <aside class="legal-contact">
+        <strong>Questions about this document?</strong>
+        <p>Send your request securely through the <a href="/contact">contact form</a>.</p>
+      </aside>
+    </main>
+    <SiteFooter />
+  </div>
+</BaseLayout>

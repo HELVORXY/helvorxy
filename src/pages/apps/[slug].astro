@@ -122,7 +122,13 @@ const [heroShot, ...restShots] = product.screenshots;
           <span class="product-eyebrow">Available on the App Store</span>
           <h2>Try {product.name} on your iPhone or iPad.</h2>
         </div>
-        <AppStoreBadge href={product.storeUrl} label={`Download ${product.name} on the App Store`} />
+        <div class="download-panel__actions">
+          <AppStoreBadge href={product.storeUrl} label={`Download ${product.name} on the App Store`} />
+          <nav class="product-legal-links" aria-label={`${product.name} legal documents`}>
+            <a href={product.legal.privacyPath}>Privacy Policy</a>
+            <a href={product.legal.termsPath}>Terms &amp; Conditions</a>
+          </nav>
+        </div>
       </section>
     </main>
 

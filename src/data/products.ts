@@ -49,6 +49,11 @@ export type Product = {
   faq: [string, string][];
   storeFact: string;
   meta: ProductMeta;
+  legal: {
+    privacyPath: string;
+    /** Products without their own terms use the global site terms. */
+    termsPath: string;
+  };
 };
 
 export const products: Product[] = [
@@ -103,6 +108,10 @@ export const products: Product[] = [
       ],
     ],
     storeFact: 'Free · In-App Purchases',
+    legal: {
+      privacyPath: '/apps/gamepad-tester/privacy',
+      termsPath: '/apps/gamepad-tester/terms',
+    },
     meta: {
       version: '1.2.7',
       updated: '26 July 2026',
@@ -153,6 +162,10 @@ export const products: Product[] = [
       ['Are widgets included?', 'Yes. Home Screen and Lock Screen widgets can show the next prayer and today’s schedule.'],
     ],
     storeFact: 'Free',
+    legal: {
+      privacyPath: '/apps/nureya/privacy',
+      termsPath: '/apps/nureya/terms',
+    },
     meta: {
       version: '1.0.2',
       updated: '5 September 2026',
@@ -206,6 +219,10 @@ export const products: Product[] = [
       ],
     ],
     storeFact: 'Free',
+    legal: {
+      privacyPath: '/apps/cv-maker-professional/privacy',
+      termsPath: '/apps/cv-maker-professional/terms',
+    },
     meta: {
       version: '1.0',
       updated: '8 July 2026',
@@ -256,6 +273,10 @@ export const products: Product[] = [
       ['Who is Wordexa for?', 'It is designed for language learners, exam preparation, travel vocabulary and everyday study.'],
     ],
     storeFact: 'Free',
+    legal: {
+      privacyPath: '/apps/wordexa/privacy',
+      termsPath: '/apps/wordexa/terms',
+    },
     meta: {
       version: '1.0',
       updated: '27 August 2026',
@@ -306,6 +327,10 @@ export const products: Product[] = [
       ['Can I use my own photos?', 'Yes. Designs can be personalised with your own wording, photos, fonts, colours and backgrounds.'],
     ],
     storeFact: 'Free',
+    legal: {
+      privacyPath: '/apps/invique/privacy',
+      termsPath: '/apps/invique/terms',
+    },
     meta: {
       version: '1.0',
       updated: '25 August 2026',

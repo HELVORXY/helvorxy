@@ -1,11 +1,12 @@
 ---
 import SimplePage from '../layouts/SimplePage.astro';
 import { site } from '../data/site';
+import { products } from '../data/products';
 ---
-<SimplePage heading="Terms" description={`Terms of use for ${site.name} apps and this website.`}>
+<SimplePage heading="Terms" description={`Terms of use for the ${site.name} website and applications.`}>
   <p>
-    Apps published by {site.name} are distributed through the Apple App Store and are also
-    governed by Apple's Licensed Application End User License Agreement.
+    These general terms cover use of the {site.name} website. Applications may also have
+    product-specific terms and are distributed under the applicable App Store terms.
   </p>
   <p>
     App names, icons and screenshots on this site are shown for identification of the
@@ -14,4 +15,14 @@ import { site } from '../data/site';
   <p>
     For anything not covered here, use our <a href="/contact">contact form</a>.
   </p>
+
+  <h2>Application terms</h2>
+  <div class="legal-directory">
+    {products.map((product) => (
+      <a href={product.legal.termsPath}>
+        <span>{product.name}</span>
+        <small>{product.legal.termsPath === '/terms' ? 'Covered by these terms' : 'Read Terms & Conditions →'}</small>
+      </a>
+    ))}
+  </div>
 </SimplePage>

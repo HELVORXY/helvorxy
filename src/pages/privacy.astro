@@ -1,11 +1,12 @@
 ---
 import SimplePage from '../layouts/SimplePage.astro';
 import { site } from '../data/site';
+import { products } from '../data/products';
 ---
-<SimplePage heading="Privacy" description={`How ${site.name} apps handle your data.`}>
+<SimplePage heading="Privacy" description={`How ${site.name} websites and apps handle your data.`}>
   <p>
-    Each app's data practices are published on its App Store listing, under App Privacy.
-    Those listings are the authoritative source.
+    This page describes the {site.name} website. Each application has its own privacy
+    policy covering the data and services relevant to that product.
   </p>
   <p>
     This site itself sets no tracking cookies. Your day/night theme choice is stored
@@ -20,4 +21,14 @@ import { site } from '../data/site';
   <p>
     Questions about a specific app? Use our <a href="/contact">contact form</a>.
   </p>
+
+  <h2>Application privacy policies</h2>
+  <div class="legal-directory">
+    {products.map((product) => (
+      <a href={product.legal.privacyPath}>
+        <span>{product.name}</span>
+        <small>Read Privacy Policy →</small>
+      </a>
+    ))}
+  </div>
 </SimplePage>
